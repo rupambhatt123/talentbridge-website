@@ -1,0 +1,400 @@
+{
+  "common": {
+    "siteName": "TalentBridge",
+    "tagline": "HR & Recruitment Solutions",
+    "phone": "+1 000 000 000",
+    "footerPhone": "+1 000 000 000",
+    "email": "hello@xyz.com",
+    "contactEmail": "contact@xyz.com",
+    "address": "73 Bridge St Brooklyn, USA.",
+    "footerAddress": {
+      "line1": "258 Business District",
+      "line2": "San Francisco, CA 94105"
+    },
+    "socialLinks": {
+      "facebook": "#",
+      "x": "#",
+      "linkedin": "#",
+      "instagram": "#"
+    }
+  },
+  "categories": {
+    "TalentBridge": {
+      "templateComponents": {
+        "template-1": {
+          "shared": {
+            "Header": "TBHeader1",
+            "Footer": "TBFooter1"
+          },
+          "pages": {
+            "home": {
+              "components": [
+                { "key": "Hero", "component": "TBHero1" },
+                { "key": "About", "component": "TBAbout1" },
+                { "key": "TeamBanner", "component": "TBTeamBanner1" },
+                { "key": "Services", "component": "TBServices1" },
+                { "key": "WhyChooseUs", "component": "TBWhyChooseUs1" },
+                { "key": "Testimonials", "component": "TBTestimonials1" },
+                { "key": "FAQ", "component": "TBFAQ1" },
+                { "key": "Contact", "component": "TBContact1" }
+              ]
+            }
+          }
+        }
+      },
+      "sections": {
+        "Header": {
+          "variants": {
+            "TBHeader1": {
+              "logo": "/logo.png",
+              "logoAlt": "TalentBridge HR & Recruitment Solutions",
+              "logoWidth": 220,
+              "logoHeight": 60,
+              "defaultActiveId": "home",
+              "openMenuLabel": "Open menu",
+              "closeMenuLabel": "Close menu",
+              "navLinks": [
+                { "name": "Home", "id": "home" },
+                { "name": "About Us", "id": "about" },
+                { "name": "Our Services", "id": "services" },
+                { "name": "Why Choose Us", "id": "why-us" },
+                { "name": "Testimonials", "id": "testimonials" },
+                { "name": "FAQs", "id": "faqs" }
+              ],
+              "ctaButton": {
+                "text": "Contact Us",
+                "href": "#contact"
+              }
+            }
+          }
+        },
+        "Hero": {
+          "variants": {
+            "TBHero1": {
+              "badgeItems": ["People", "Process", "Performance"],
+              "titleLine1": "Your Strategic",
+              "titleLine2": "Partner for",
+              "titleHighlight": "Talent Acquisition",
+              "description": "End-to-end recruitment and HR solutions to help businesses build high-performing teams and professionals find the right career opportunities.",
+              "image": "/hero.webp",
+              "imageAlt": "Professional woman smiling",
+              "stats": [
+                {
+                  "icon": "users",
+                  "to": 5000,
+                  "suffix": "+",
+                  "label": "Candidates Placed",
+                  "fill": true
+                },
+                {
+                  "icon": "building",
+                  "to": 250,
+                  "suffix": "+",
+                  "label": "Partner Companies",
+                  "fill": false
+                },
+                {
+                  "icon": "award",
+                  "to": 15,
+                  "suffix": "+",
+                  "label": "Industry Expertise",
+                  "fill": false
+                },
+                {
+                  "icon": "trending",
+                  "to": 98,
+                  "suffix": "%",
+                  "label": "Client Satisfaction",
+                  "fill": false
+                }
+              ]
+            }
+          }
+        },
+        "About": {
+          "variants": {
+            "TBAbout1": {
+              "badge": "About Us",
+              "titleLine1": "Your Trusted HR Recruitment Partner",
+              "titleLine2": "for Building",
+              "titleHighlight": "High-Performing Teams",
+              "description": "We are a professional HR recruitment agency that helps businesses find, attract, and hire the right talent. With industry expertise and a people-first approach, we deliver staffing solutions that drive growth and long-term success.",
+              "teamImage": "/p1.webp",
+              "teamImageAlt": "Recruitment team in a meeting",
+              "handshakeImage": "/p4.webp",
+              "handshakeImageAlt": "Handshake after a successful hire",
+              "experienceYears": 15,
+              "experienceLabel": "Years of Excellence",
+              "teamTitle": "Our Expert",
+              "teamHighlight": "Recruitment Team",
+              "avatars": [
+                "/staff1.webp",
+                "/staff2.webp",
+                "/staff3.webp",
+                "/staff4.webp"
+              ]
+            }
+          }
+        },
+        "TeamBanner": {
+          "variants": {
+            "TBTeamBanner1": {
+              "image": "/photo1.png",
+              "alt": "TalentBridge HR & Recruitment Solutions team meeting"
+            }
+          }
+        },
+        "Services": {
+          "variants": {
+            "TBServices1": {
+              "badge": "Our Services",
+              "titleLine1": "What We Offer Connecting",
+              "titleHighlight": "Talent with Opportunity",
+              "items": [
+                {
+                  "num": "01",
+                  "title": "Temporary Staffing Solutions",
+                  "description": "We provide comprehensive staffing services designed to meet unique needs of businesses and job seekers, from temporary staffing.",
+                  "image": "/p1.webp"
+                },
+                {
+                  "num": "02",
+                  "title": "On-Demand Workforce Solutions",
+                  "description": "From temporary staffing & direct placements to executive recruitment and project-based solutions, our team is dedicated to delivering.",
+                  "image": "/p2.webp"
+                },
+                {
+                  "num": "03",
+                  "title": "Executive Search & Recruitment",
+                  "description": "We pride ourselves understanding your goals, whether you’re a company looking for talent or a professional seeking the perfect career.",
+                  "image": "/p3.webp"
+                },
+                {
+                  "num": "04",
+                  "title": "IT & Technology Recruitment",
+                  "description": "We pride ourselves understanding your goals, whether you’re a company looking for talent or a professional seeking the perfect career.",
+                  "image": "/p4.webp"
+                },
+                {
+                  "num": "05",
+                  "title": "Talent Outsourcing (RPO)",
+                  "description": "We pride ourselves understanding your goals, whether you’re a company looking for talent or a professional seeking the perfect career.",
+                  "image": "/p5.webp"
+                },
+                {
+                  "num": "06",
+                  "title": "HR Consulting & Advisory",
+                  "description": "We pride ourselves understanding your goals, whether you’re a company looking for talent or a professional seeking the perfect career.",
+                  "image": "/p2.webp"
+                }
+              ]
+            }
+          }
+        },
+        "WhyChooseUs": {
+          "variants": {
+            "TBWhyChooseUs1": {
+              "title": "Why Choose",
+              "titleHighlight": "Us?",
+              "mainImage": "photo1.png",
+              "mainImageAlt": "Business professional",
+              "teamImage": "/p1.webp",
+              "teamImageAlt": "Recruitment team at work",
+              "reasons": [
+                { "title": "Access to a Vast & Qualified Talent Pool", "icon": "users" },
+                { "title": "Industry Expertise & Proven Experience", "icon": "award" },
+                { "title": "Flexible & Customized Hiring Solutions", "icon": "settings" },
+                { "title": "Quick Turnaround & Reliable Support", "icon": "handshake" },
+                { "title": "A Trusted Partner for Your Business Growth", "icon": "trending" }
+              ]
+            }
+          }
+        },
+        "Testimonials": {
+          "variants": {
+            "TBTestimonials1": {
+              "badge": "Testimonials",
+              "title": "Trusted by Growing",
+              "titleHighlight": "Businesses & Leaders",
+              "description": "Hear from hiring managers and professionals who partnered with us to build strong teams and advance careers.",
+              "items": [
+                {
+                  "id": 1,
+                  "name": "Ananya Verma",
+                  "role": "VP of People, NovaTech Systems",
+                  "image": "/staff1.webp",
+                  "review": "TalentBridge helped us fill critical engineering and product roles ahead of schedule. Every shortlisted candidate matched both our technical bar and team culture.",
+                  "rating": 5
+                },
+                {
+                  "id": 2,
+                  "name": "Rohan Kapoor",
+                  "role": "Director of Operations, Crestline Retail",
+                  "image": "/staff2.webp",
+                  "review": "Their on-demand staffing and recruitment process made scaling our regional team effortless. Communication was clear, structured, and reliable from day one.",
+                  "rating": 5
+                },
+                {
+                  "id": 3,
+                  "name": "Meera Nair",
+                  "role": "Head of Talent, FinEdge Corp",
+                  "image": "/staff3.webp",
+                  "review": "From executive search to HR advisory, they act as a true strategic partner rather than just a vendor. Our retention rate improved noticeably after hiring through them.",
+                  "rating": 5
+                }
+              ]
+            }
+          }
+        },
+        "FAQ": {
+          "variants": {
+            "TBFAQ1": {
+              "badge": "FAQS",
+              "badgeIcon": "?",
+              "title": "Frequently Asked",
+              "titleHighlight": "Questions",
+              "description": "Find quick answers to the most common questions about our services, process, and support.",
+              "image": "/p2.webp",
+              "imageAlt": "Support representative smiling at her laptop",
+              "defaultOpenIndex": 0,
+              "items": [
+                {
+                  "question": "What services do you offer?",
+                  "answer": "We offer end-to-end recruitment solutions, including talent acquisition, permanent hiring, contract staffing, executive search, HR consulting, and recruitment process outsourcing (RPO)."
+                },
+                {
+                  "question": "How do you source the right candidates?",
+                  "answer": "We use a multi-channel sourcing strategy combining our vast internal database, professional networks, targeted headhunting, and advanced AI screening tools."
+                },
+                {
+                  "question": "Can you handle hiring for multiple positions?",
+                  "answer": "Yes, our scalable recruitment teams and RPO frameworks are designed to handle high-volume and multi-role recruitment seamlessly."
+                },
+                {
+                  "question": "What industries do you work with?",
+                  "answer": "We work across IT & Technology, Healthcare, Finance, Manufacturing, Retail, and professional corporate services."
+                },
+                {
+                  "question": "How can I get started with your services?",
+                  "answer": "You can reach out to us using our contact form below or call our office directly to speak with an HR specialist."
+                }
+              ]
+            }
+          }
+        },
+        "Contact": {
+          "variants": {
+            "TBContact1": {
+              "badge": "Contact Us",
+              "titleLine1": "Let’s Work Together To",
+              "titleHighlight": "Achieve Your Goals",
+              "description": "Have questions about our services or need assistance with your staffing or career needs? We’re here to help!",
+              "contactInfo": [
+                {
+                  "icon": "location",
+                  "label": "Our Location",
+                  "value": "73 Bridge St Brooklyn, USA."
+                },
+                {
+                  "icon": "phone",
+                  "label": "Office Number",
+                  "value": "+1 000 000 000"
+                },
+                {
+                  "icon": "email",
+                  "label": "Our Mail",
+                  "value": "contact@xyz.com"
+                }
+              ],
+              "fields": [
+                {
+                  "id": "firstName",
+                  "label": "First Name",
+                  "placeholder": "First Name",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "id": "email",
+                  "label": "Email Address",
+                  "placeholder": "Email",
+                  "type": "email",
+                  "required": true
+                },
+                {
+                  "id": "phone",
+                  "label": "Phone Number",
+                  "placeholder": "Phone Number",
+                  "type": "text",
+                  "required": true
+                },
+                {
+                  "id": "service",
+                  "label": "Service Name",
+                  "placeholder": "Service Type",
+                  "type": "text",
+                  "required": true
+                }
+              ],
+              "messageField": {
+                "id": "message",
+                "label": "Message",
+                "placeholder": "Type your message...",
+                "rows": 4,
+                "required": true
+              },
+              "submitButtonText": "Send",
+              "thankYou": {
+                "title": "Thank You for",
+                "titleHighlight": "Reaching Out!",
+                "description": "Your message has been received. Our HR recruitment specialists will review your inquiry and get back to you shortly.",
+                "backButtonText": "Send Another Message"
+              }
+            }
+          }
+        },
+        "Footer": {
+          "variants": {
+            "TBFooter1": {
+              "logo": "/logo1.png",
+              "logoAlt": "TalentBridge HR & Recruitment Solutions",
+              "logoWidth": 220,
+              "logoHeight": 60,
+              "ctaTitle": "Let’s Talk",
+              "ctaHighlight": "With Us",
+              "ctaLine1": "Have a question, need support, or want to know more about our services?",
+              "ctaLine2": "We’d love to hear from you.",
+              "email": "hello@xyz.com",
+              "socials": [
+                { "name": "Facebook", "url": "#" },
+                { "name": "X", "url": "#" },
+                { "name": "LinkedIn", "url": "#" },
+                { "name": "Instagram", "url": "#" }
+              ],
+              "about": "Your trusted partner in finding and nurturing top talent—creating lasting success for businesses and careers.",
+              "quickLinksTitle": "Quick Links",
+              "quickLinks": [
+                { "name": "Home", "href": "#home" },
+                { "name": "About Us", "href": "#about" },
+                { "name": "Our Services", "href": "#services" },
+                { "name": "Case Studies", "href": "#services" },
+                { "name": "Contact Us", "href": "#contact" }
+              ],
+              "contactTitle": "Contact Info",
+              "contactItems": [
+                { "icon": "phone", "lines": ["+1 000 000 000"], "fill": true },
+                { "icon": "mail", "lines": ["hello@xyz.com"], "fill": false },
+                {
+                  "icon": "map",
+                  "lines": ["258 Business District", "San Francisco, CA 94105"],
+                  "fill": true
+                }
+              ],
+              "copyright": "© 2026 TalentBridge HR & Recruitment Solutions. All Rights Reserved. Powered By Lestow."
+            }
+          }
+        }
+      }
+    }
+  }
+}
