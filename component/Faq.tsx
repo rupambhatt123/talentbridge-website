@@ -26,7 +26,7 @@ export default function Faq() {
     <MotionConfig reducedMotion="user">
       <section
         id="faqs"
-        className={`${montserrat.className} relative overflow-hidden bg-[#fdfdff] py-10 lg:py-12`}
+        className={`${montserrat.className} relative overflow-x-clip bg-[#fdfdff] py-10 lg:py-12`}
       >
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div
@@ -44,8 +44,8 @@ export default function Faq() {
           <div className="absolute -right-40 bottom-0 h-[440px] w-[440px] rounded-full bg-[#0B2545]/[0.07] blur-3xl" />
         </div>
 
-        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-8 px-4 sm:gap-10 sm:px-6 lg:grid-cols-[5fr_7fr] lg:gap-12">
-          <div className="mx-auto w-full max-w-[330px] px-3 py-3 sm:max-w-[460px] sm:px-6 sm:py-4 lg:max-w-none lg:px-6">
+        <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-start gap-8 px-4 sm:gap-10 sm:px-6 lg:grid-cols-[5fr_7fr] lg:gap-12">
+          <div className="mx-auto w-full max-w-[330px] px-3 py-3 sm:max-w-[460px] sm:px-6 sm:py-4 lg:sticky lg:top-28 lg:max-w-none lg:self-start lg:px-6">
             <div className="relative">
               <motion.div
                 aria-hidden
@@ -69,12 +69,12 @@ export default function Faq() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true, margin: "-80px" }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
-                className="group relative overflow-hidden rounded-[1.75rem] rounded-tr-[3rem] border-[3px] border-white bg-slate-100 shadow-2xl shadow-slate-400/30 sm:rounded-[2.5rem] sm:rounded-tr-[4rem]"
+                className="relative overflow-hidden rounded-[1.75rem] rounded-tr-[3rem] border-[3px] border-white bg-slate-100 shadow-2xl shadow-slate-400/30 sm:rounded-[2.5rem] sm:rounded-tr-[4rem]"
               >
                 <img
                   src={faqData.image}
                   alt={faqData.imageAlt}
-                  className="h-[270px] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105 sm:h-[400px] lg:h-[470px]"
+                  className="h-[270px] w-full object-cover object-top sm:h-[400px] lg:h-[470px]"
                 />
               </motion.div>
             </div>

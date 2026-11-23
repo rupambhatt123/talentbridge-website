@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, MotionConfig } from "framer-motion";
 import { ChevronLeft, ChevronRight, Quote, Star } from "lucide-react";
 import { Montserrat } from "next/font/google";
@@ -24,9 +24,30 @@ export default function Testimonials() {
     websiteData.categories.TalentBridge.sections.Testimonials.variants
       .TBTestimonials1;
 
+  const items = testimonialsData.items;
+  const totalItems = items.length;
+
   const [mobileIndex, setMobileIndex] = useState(0);
-  const totalItems = testimonialsData.items.length;
-  const activeItem = testimonialsData.items[mobileIndex];
+  const [desktopIndex, setDesktopIndex] = useState(0);
+  const [cardsPerPage, setCardsPerPage] = useState(3);
+
+  useEffect(() => {
+    const updateCardsPerPage = () => {
+      setCardsPerPage(window.innerWidth >= 1024 ? 3 : 2);
+    };
+    updateCardsPerPage();
+    window.addEventListener("resize", updateCardsPerPage, { passive: true });
+    return () => window.removeEventListener("resize", updateCardsPerPage);
+  }, []);
+
+  const maxDesktopIndex = Math.max(0, totalItems - cardsPerPage);
+  const safeDesktopIndex = Math.min(desktopIndex, maxDesktopIndex);
+  const visibleDesktopItems = items.slice(
+    safeDesktopIndex,
+    safeDesktopIndex + cardsPerPage
+  );
+
+  const activeItem = items[mobileIndex];
 
   const handlePrev = () => {
     setMobileIndex((prev) => (prev === 0 ? totalItems - 1 : prev - 1));
@@ -34,6 +55,20 @@ export default function Testimonials() {
 
   const handleNext = () => {
     setMobileIndex((prev) => (prev === totalItems - 1 ? 0 : prev + 1));
+  };
+
+  const handleDesktopPrev = () => {
+    setDesktopIndex((prev) => {
+      const current = Math.min(prev, maxDesktopIndex);
+      return current === 0 ? maxDesktopIndex : current - 1;
+    });
+  };
+
+  const handleDesktopNext = () => {
+    setDesktopIndex((prev) => {
+      const current = Math.min(prev, maxDesktopIndex);
+      return current >= maxDesktopIndex ? 0 : current + 1;
+    });
   };
 
   return (
@@ -80,124 +115,158 @@ export default function Testimonials() {
             </p>
           </motion.div>
 
-          <div className="mt-8 md:hidden">
-            <motion.article
-              key={activeItem.id}
-              initial={{ opacity: 0, x: 24 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="flex flex-col justify-between rounded-[1.5rem] border border-slate-200/80 bg-[#eef2f8]/70 p-5 shadow-lg shadow-slate-300/35"
-            >
-              <div>
-                <div className="flex items-center justify-between gap-2">
-                  <div className="flex items-center gap-1 text-[#c8102e]">
-                    {Array.from({ length: activeItem.rating }).map((_, sIdx) => (
-                      <Star
-                        key={sIdx}
-                        size={16}
-                        fill="currentColor"
-                        strokeWidth={1.8}
-                      />
-                    ))}
-                  </div>
-                  <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#fde4e7] text-[#a0001a]">
-                    <Quote size={16} fill="currentColor" />
-                  </span>
-                </div>
-
-                <p className="mt-4 text-sm font-medium leading-relaxed text-slate-700">
-                  “{activeItem.review}”
-                </p>
-              </div>
-
-              <div className="mt-5 flex items-center gap-3 border-t border-slate-200 pt-4">
-                <img
-                  src={activeItem.image}
-                  alt={activeItem.name}
-                  className="h-11 w-11 shrink-0 rounded-full border-2 border-white object-cover shadow-sm"
-                />
-                <div className="min-w-0">
-                  <h3 className="truncate text-sm font-extrabold text-[#0B2545]">
-                    {activeItem.name}
-                  </h3>
-                  <p className="truncate text-xs font-semibold text-[#a0001a]">
-                    {activeItem.role}
-                  </p>
-                </div>
-              </div>
-            </motion.article>
-
-            <div className="mt-5 flex items-center justify-between gap-4">
-              <button
-                type="button"
-                onClick={handlePrev}
-                aria-label="Previous testimonial"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-[#0B2545] shadow-sm transition hover:border-[#a0001a] hover:bg-[#fde4e7] hover:text-[#a0001a] active:scale-95"
-              >
-                <ChevronLeft size={22} strokeWidth={2.4} />
-              </button>
-
-              <span className="text-sm font-bold text-[#0B2545]">
-                {mobileIndex + 1} / {totalItems}
-              </span>
-
-              <button
-                type="button"
-                onClick={handleNext}
-                aria-label="Next testimonial"
-                className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-[#0B2545] shadow-sm transition hover:border-[#a0001a] hover:bg-[#fde4e7] hover:text-[#a0001a] active:scale-95"
-              >
-                <ChevronRight size={22} strokeWidth={2.4} />
-              </button>
-            </div>
-          </div>
-
-          <div className="mt-10 hidden grid-cols-1 gap-6 md:grid md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
-            {testimonialsData.items.map((item, idx) => (
+          {totalItems > 0 && activeItem && (
+            <div className="mt-8 md:hidden">
               <motion.article
-                key={item.id}
-                {...reveal(0.1 + idx * 0.08)}
-                className="flex flex-col justify-between rounded-[1.75rem] border border-slate-200/80 bg-[#eef2f8]/70 p-6 shadow-lg shadow-slate-300/35 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-7"
+                key={activeItem.id}
+                initial={{ opacity: 0, x: 24 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.35, ease: "easeOut" }}
+                className="flex flex-col justify-between rounded-[1.5rem] border border-slate-200/80 bg-[#eef2f8]/70 p-5 shadow-lg shadow-slate-300/35"
               >
                 <div>
                   <div className="flex items-center justify-between gap-2">
                     <div className="flex items-center gap-1 text-[#c8102e]">
-                      {Array.from({ length: item.rating }).map((_, sIdx) => (
+                      {Array.from({ length: activeItem.rating }).map((_, sIdx) => (
                         <Star
                           key={sIdx}
-                          size={17}
+                          size={16}
                           fill="currentColor"
                           strokeWidth={1.8}
                         />
                       ))}
                     </div>
-                    <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#fde4e7] text-[#a0001a]">
-                      <Quote size={18} fill="currentColor" />
+                    <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#fde4e7] text-[#a0001a]">
+                      <Quote size={16} fill="currentColor" />
                     </span>
                   </div>
 
-                  <p className="mt-5 text-sm font-medium leading-relaxed text-slate-700 sm:text-base">
-                    “{item.review}”
+                  <p className="mt-4 text-sm font-medium leading-relaxed text-slate-700">
+                    “{activeItem.review}”
                   </p>
                 </div>
 
-                <div className="mt-6 flex items-center gap-3.5 border-t border-slate-200 pt-5">
+                <div className="mt-5 flex items-center gap-3 border-t border-slate-200 pt-4">
                   <img
-                    src={item.image}
-                    alt={item.name}
-                    className="h-12 w-12 shrink-0 rounded-full border-2 border-white object-cover shadow-sm"
+                    src={activeItem.image}
+                    alt={activeItem.name}
+                    className="h-11 w-11 shrink-0 rounded-full border-2 border-white object-cover shadow-sm"
                   />
                   <div className="min-w-0">
-                    <h3 className="truncate text-base font-extrabold text-[#0B2545]">
-                      {item.name}
+                    <h3 className="truncate text-sm font-extrabold text-[#0B2545]">
+                      {activeItem.name}
                     </h3>
-                    <p className="truncate text-xs font-semibold text-[#a0001a] sm:text-sm">
-                      {item.role}
+                    <p className="truncate text-xs font-semibold text-[#a0001a]">
+                      {activeItem.role}
                     </p>
                   </div>
                 </div>
               </motion.article>
-            ))}
+
+              {totalItems > 1 && (
+                <div className="mt-5 flex items-center justify-between gap-4">
+                  <button
+                    type="button"
+                    onClick={handlePrev}
+                    aria-label="Previous testimonial"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-[#0B2545] shadow-sm transition hover:border-[#a0001a] hover:bg-[#fde4e7] hover:text-[#a0001a] active:scale-95"
+                  >
+                    <ChevronLeft size={22} strokeWidth={2.4} />
+                  </button>
+
+                  <span className="text-sm font-bold text-[#0B2545]">
+                    {mobileIndex + 1} / {totalItems}
+                  </span>
+
+                  <button
+                    type="button"
+                    onClick={handleNext}
+                    aria-label="Next testimonial"
+                    className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-[#0B2545] shadow-sm transition hover:border-[#a0001a] hover:bg-[#fde4e7] hover:text-[#a0001a] active:scale-95"
+                  >
+                    <ChevronRight size={22} strokeWidth={2.4} />
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="mt-10 hidden md:block">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+              {visibleDesktopItems.map((item, idx) => (
+                <motion.article
+                  key={item.id}
+                  {...reveal(0.1 + idx * 0.08)}
+                  className="flex flex-col justify-between rounded-[1.75rem] border border-slate-200/80 bg-[#eef2f8]/70 p-6 shadow-lg shadow-slate-300/35 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl sm:p-7"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2">
+                      <div className="flex items-center gap-1 text-[#c8102e]">
+                        {Array.from({ length: item.rating }).map((_, sIdx) => (
+                          <Star
+                            key={sIdx}
+                            size={17}
+                            fill="currentColor"
+                            strokeWidth={1.8}
+                          />
+                        ))}
+                      </div>
+                      <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-[#fde4e7] text-[#a0001a]">
+                        <Quote size={18} fill="currentColor" />
+                      </span>
+                    </div>
+
+                    <p className="mt-5 text-sm font-medium leading-relaxed text-slate-700 sm:text-base">
+                      “{item.review}”
+                    </p>
+                  </div>
+
+                  <div className="mt-6 flex items-center gap-3.5 border-t border-slate-200 pt-5">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="h-12 w-12 shrink-0 rounded-full border-2 border-white object-cover shadow-sm"
+                    />
+                    <div className="min-w-0">
+                      <h3 className="truncate text-base font-extrabold text-[#0B2545]">
+                        {item.name}
+                      </h3>
+                      <p className="truncate text-xs font-semibold text-[#a0001a] sm:text-sm">
+                        {item.role}
+                      </p>
+                    </div>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+
+            {totalItems > cardsPerPage && (
+              <div className="mt-7 flex items-center justify-end gap-3">
+                <span className="mr-2 text-sm font-bold text-[#0B2545]">
+                  {safeDesktopIndex + 1}–
+                  {Math.min(safeDesktopIndex + cardsPerPage, totalItems)} of{" "}
+                  {totalItems}
+                </span>
+
+                <button
+                  type="button"
+                  onClick={handleDesktopPrev}
+                  aria-label="Previous testimonials"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-[#0B2545] shadow-sm transition hover:border-[#a0001a] hover:bg-[#fde4e7] hover:text-[#a0001a] active:scale-95"
+                >
+                  <ChevronLeft size={22} strokeWidth={2.4} />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={handleDesktopNext}
+                  aria-label="Next testimonials"
+                  className="flex h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-[#0B2545] shadow-sm transition hover:border-[#a0001a] hover:bg-[#fde4e7] hover:text-[#a0001a] active:scale-95"
+                >
+                  <ChevronRight size={22} strokeWidth={2.4} />
+                </button>
+              </div>
+            )}
           </div>
         </div>
       </section>

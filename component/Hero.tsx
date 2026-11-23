@@ -63,7 +63,6 @@ export default function Hero() {
     websiteData.categories.TalentBridge.sections.Hero.variants.TBHero1;
 
   const reduce = useReducedMotion();
-  const [imageFailed, setImageFailed] = useState(false);
 
   const statsRef = useRef<HTMLDivElement>(null);
   const statsInView = useInView(statsRef, { once: true, amount: 0.5 });
@@ -71,14 +70,14 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className={`${montserrat.className} relative overflow-hidden bg-[#ffffff] pt-5 pb-8 sm:pt-6 lg:pt-4`}
+      className={`${montserrat.className} relative overflow-x-clip bg-[#ffffff] pt-5 pb-0 sm:pt-7 lg:pt-6`}
     >
-      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-center gap-6 px-4 sm:px-6 lg:grid-cols-[1fr_1.15fr] lg:gap-4">
+      <div className="relative mx-auto grid max-w-7xl grid-cols-1 items-end gap-4 px-4 sm:px-6 lg:grid-cols-[1fr_1.15fr] lg:gap-4">
         <motion.div
           initial={{ opacity: 0, x: -30 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
-          className="z-10 space-y-4 sm:space-y-5"
+          className="z-10 space-y-4 pb-2 sm:space-y-5 lg:pb-16"
         >
           <div className="inline-flex max-w-full flex-wrap items-center gap-2 rounded-full bg-[#fde4e7] px-4 py-2 text-xs font-bold text-[#990012] sm:gap-2.5 sm:px-5 sm:py-2.5 sm:text-[15px]">
             <Users
@@ -140,24 +139,23 @@ export default function Hero() {
           initial={{ opacity: 0, scale: 0.97 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, delay: 0.15, ease: "easeOut" }}
-          className="relative flex justify-center sm:-mr-2 lg:-mr-8 lg:justify-end"
+          className="relative flex items-end justify-center pt-6 sm:pt-14 lg:justify-end"
         >
-          {imageFailed ? (
+          <div className="relative flex w-full max-w-[340px] items-end justify-center pb-5 sm:max-w-[650px] sm:pb-8 lg:max-w-[700px]">
+            <div className="h-[235px] w-[92%] overflow-hidden rounded-[2rem] shadow-lg sm:h-[385px] sm:w-[86%] sm:rounded-[2.25rem] lg:h-[425px]">
+              <img
+                src={heroData.bgImage}
+                alt={heroData.bgImageAlt}
+                className="h-full w-full object-cover"
+              />
+            </div>
+
             <img
-              //src={heroData.fallbackImage}
-              alt={heroData.imageAlt}
-              className="h-[320px] w-full max-w-[640px] rounded-[1.5rem] object-cover object-top sm:h-[420px] sm:rounded-[2rem]"
-            />
-          ) : (
-            <motion.img
               src={heroData.image}
               alt={heroData.imageAlt}
-              onError={() => setImageFailed(true)}
-              className="block h-auto w-full max-w-[420px] scale-100 select-none mix-blend-multiply sm:max-w-[680px]"
-              animate={reduce ? undefined : { y: [0, -6, 0] }}
-              transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
+              className="pointer-events-none absolute -bottom-2 z-10 block max-h-[295px] w-full select-none object-contain object-bottom drop-shadow-[0_14px_24px_rgba(11,37,69,0.28)] sm:-bottom-3 sm:max-h-[520px] sm:w-[108%] sm:max-w-none lg:max-h-[560px]"
             />
-          )}
+          </div>
         </motion.div>
       </div>
 
@@ -166,7 +164,7 @@ export default function Hero() {
         initial={{ opacity: 0, y: 24 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.4, ease: "easeOut" }}
-        className="relative z-10 mx-auto mt-4 max-w-[84rem] px-4 sm:px-6 lg:mt-2"
+        className="relative z-20 mx-auto mt-0 max-w-[84rem] px-4 sm:px-6"
       >
         <div
           className="grid grid-cols-1 gap-5 rounded-[1.5rem] bg-[#0B2545] px-4 py-6 text-white shadow-xl shadow-[#0B2545]/25 sm:grid-cols-2 sm:gap-y-7 sm:rounded-[2rem] md:grid-cols-4 lg:py-7"

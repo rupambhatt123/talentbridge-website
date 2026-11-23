@@ -39,24 +39,30 @@ function PeopleMark() {
   return (
     <svg
       aria-hidden
-      viewBox="0 0 120 90"
-      className="h-14 w-16 shrink-0 sm:h-20 sm:w-24 lg:h-[5.5rem] lg:w-28"
+      viewBox="0 0 132 82"
+      className="h-12 w-20 shrink-0 sm:h-16 sm:w-24 lg:h-[4.5rem] lg:w-28"
     >
-      <circle cx="60" cy="16" r="13" fill="#a0001a" />
-      <circle cx="20" cy="34" r="11" fill="#0B2545" />
-      <circle cx="100" cy="34" r="11" fill="#0B2545" />
-      <path d="M32 82 A28 28 0 0 1 88 82 Z" fill="#a0001a" />
+      <circle cx="66" cy="21" r="12.5" fill="#a0001a" />
+      <circle cx="29" cy="34" r="10.5" fill="#0B2545" />
+      <circle cx="103" cy="34" r="10.5" fill="#0B2545" />
       <path
-        d="M4 82 C4 62 14 52 28 50"
-        stroke="#0B2545"
-        strokeWidth="11"
+        d="M36 74 A31 31 0 0 1 96 74"
+        stroke="#a0001a"
+        strokeWidth="12"
         strokeLinecap="round"
         fill="none"
       />
       <path
-        d="M116 82 C116 62 106 52 92 50"
+        d="M11 74 C13 60 22 52 34 50"
         stroke="#0B2545"
-        strokeWidth="11"
+        strokeWidth="10"
+        strokeLinecap="round"
+        fill="none"
+      />
+      <path
+        d="M121 74 C119 60 110 52 98 50"
+        stroke="#0B2545"
+        strokeWidth="10"
         strokeLinecap="round"
         fill="none"
       />
@@ -72,7 +78,7 @@ export default function About() {
     <MotionConfig reducedMotion="user">
       <section
         id="about"
-        className={`${montserrat.className} relative overflow-hidden bg-white py-10 sm:py-12 lg:py-14`}
+        className={`${montserrat.className} relative overflow-x-clip bg-white py-10 sm:py-12 lg:py-14`}
       >
         <div aria-hidden className="pointer-events-none absolute inset-0">
           <div
@@ -91,16 +97,16 @@ export default function About() {
         </div>
 
         <div className="relative mx-auto max-w-7xl px-4 sm:px-6">
-          <div className="grid grid-cols-1 items-start gap-4 sm:gap-5 lg:grid-cols-12 lg:gap-10">
+          <div className="grid grid-cols-1 items-start gap-3.5 sm:gap-5 lg:grid-cols-12 lg:gap-10">
             <motion.div {...reveal()} className="lg:col-span-2 lg:pt-1">
-              <span className="inline-block whitespace-nowrap rounded-full border-2 border-[#0B2545] bg-white px-6 py-1.5 text-sm font-semibold text-[#0B2545] sm:px-8 sm:py-2 sm:text-lg">
+              <span className="inline-block whitespace-nowrap rounded-full border-2 border-[#0B2545] bg-white px-5 py-1.5 text-sm font-semibold text-[#0B2545] sm:px-8 sm:py-2 sm:text-lg">
                 {aboutData.badge}
               </span>
             </motion.div>
 
             <motion.h2
               {...reveal(0.1)}
-              className="text-2xl font-extrabold leading-[1.16] tracking-tight text-[#0B2545] sm:text-4xl sm:leading-[1.15] lg:col-span-10 lg:text-[2.3rem] xl:text-[2.85rem]"
+              className="text-2xl font-extrabold leading-[1.18] tracking-tight text-[#0B2545] sm:text-4xl sm:leading-[1.15] lg:col-span-10 lg:text-[2.3rem] xl:text-[2.85rem]"
             >
               {aboutData.titleLine1}
               <br className="hidden xl:block" /> {aboutData.titleLine2}{" "}
@@ -108,14 +114,14 @@ export default function About() {
             </motion.h2>
           </div>
 
-          <div className="mt-7 grid grid-cols-1 gap-x-10 gap-y-12 sm:mt-8 sm:gap-y-16 lg:mt-9 lg:grid-cols-12">
-            <div className="lg:col-span-6 lg:pb-12">
+          <div className="mt-6 grid grid-cols-1 gap-x-8 gap-y-7 sm:mt-8 sm:gap-y-8 lg:mt-9 lg:grid-cols-12 lg:items-end">
+            <div className="lg:col-span-7">
               <motion.div {...reveal(0.1)} className="relative pl-0 lg:pl-8">
                 <div className="group overflow-hidden rounded-[1.5rem] shadow-lg shadow-slate-300/40 sm:rounded-[2rem]">
                   <img
                     src={aboutData.teamImage}
                     alt={aboutData.teamImageAlt}
-                    className="h-[220px] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105 sm:h-[300px] lg:h-[300px] xl:h-[320px]"
+                    className="h-[220px] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105 sm:h-[300px] lg:h-[310px] xl:h-[330px]"
                   />
                 </div>
 
@@ -124,9 +130,9 @@ export default function About() {
                   whileInView={{ opacity: 1, scale: 1 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.4, ease: "easeOut" }}
-                  className="absolute -bottom-11 left-2 flex h-[132px] w-[156px] flex-col items-center justify-center rounded-b-[1.25rem] rounded-tl-[1.25rem] rounded-tr-[3rem] bg-[#a0001a] px-2 text-center text-white shadow-xl shadow-[#a0001a]/25 sm:-bottom-12 sm:-left-2 sm:h-[170px] sm:w-[205px] sm:rounded-b-[1.5rem] sm:rounded-tl-[1.5rem] sm:rounded-tr-[3.5rem] lg:-bottom-[7rem] lg:left-0 lg:h-[200px] lg:w-[240px] lg:rounded-b-[2rem] lg:rounded-tl-[2rem] lg:rounded-tr-[5rem]"
+                  className="relative z-10 -mt-10 ml-1 flex h-[126px] w-[148px] flex-col items-center justify-center rounded-b-[1.25rem] rounded-tl-[1.25rem] rounded-tr-[2.75rem] bg-[#a0001a] px-2 text-center text-white shadow-xl shadow-[#a0001a]/25 sm:-mt-14 sm:ml-0 sm:h-[170px] sm:w-[205px] sm:rounded-b-[1.5rem] sm:rounded-tl-[1.5rem] sm:rounded-tr-[3.5rem] lg:-mt-24 lg:h-[195px] lg:w-[235px] lg:rounded-b-[2rem] lg:rounded-tl-[2rem] lg:rounded-tr-[5rem]"
                 >
-                  <span className="text-5xl font-black leading-none sm:text-6xl lg:text-[5rem]">
+                  <span className="text-4xl font-black leading-none sm:text-6xl lg:text-[5rem]">
                     <CountUp to={aboutData.experienceYears} />
                   </span>
                   <span className="mt-1.5 text-xs font-semibold sm:mt-2 sm:text-base lg:text-lg">
@@ -137,48 +143,48 @@ export default function About() {
 
               <motion.div
                 {...reveal(0.3)}
-                className="mt-14 flex flex-wrap items-center gap-3 sm:mt-16 sm:flex-nowrap sm:gap-4 lg:mt-6 lg:pl-[17.5rem]"
+                className="mt-5 flex items-center gap-3 sm:gap-4 lg:-mt-16 lg:pl-[17.5rem]"
               >
-                <div className="flex -space-x-2.5 sm:-space-x-3">
+                <div className="flex shrink-0 -space-x-2.5 sm:-space-x-3">
                   {aboutData.avatars.map((src, i) => (
                     <img
                       key={i}
                       src={src}
                       alt=""
-                      className="h-10 w-10 rounded-full border-2 border-white object-cover object-top shadow-sm sm:h-12 sm:w-12"
+                      className="h-9 w-9 rounded-full border-2 border-white object-cover object-top shadow-sm sm:h-12 sm:w-12"
                     />
                   ))}
                 </div>
-                <div className="h-9 w-0.5 shrink-0 bg-[#0B2545] sm:h-11" />
-                <div className="leading-tight">
-                  <p className="text-sm font-semibold text-[#0B2545] sm:text-base lg:text-lg">
+                <div className="h-9 w-0.5 shrink-0 bg-[#0B2545] sm:h-12" />
+                <div className="min-w-0 flex-1 leading-tight sm:min-w-[18.5rem]">
+                  <p className="truncate text-xs font-semibold text-[#0B2545] sm:text-base lg:text-lg">
                     {aboutData.teamTitle}
                   </p>
-                  <p className="whitespace-nowrap text-base font-extrabold text-[#a0001a] sm:text-lg lg:text-xl">
+                  <p className="truncate text-sm font-extrabold text-[#a0001a] sm:text-lg lg:text-xl">
                     {aboutData.teamHighlight}
                   </p>
                 </div>
               </motion.div>
             </div>
 
-            <div className="flex flex-col lg:col-span-6">
+            <div className="flex h-full flex-col justify-between lg:col-span-5">
               <motion.p
                 {...reveal(0.2)}
-                className="max-w-[34rem] text-base font-medium leading-[1.68] text-slate-800 sm:text-lg sm:leading-[1.7] lg:pt-4 lg:text-xl"
+                className="max-w-[34rem] text-sm font-medium leading-[1.68] text-slate-800 sm:text-lg sm:leading-[1.7] lg:pt-2 lg:text-xl"
               >
                 {aboutData.description}
               </motion.p>
 
               <motion.div
                 {...reveal(0.35)}
-                className="mt-7 flex items-end justify-between gap-4 sm:mt-8 sm:justify-end sm:gap-8 lg:mt-auto lg:pt-6"
+                className="mt-6 flex items-end justify-between gap-3 sm:mt-8 sm:justify-end sm:gap-7 lg:mt-auto lg:pt-6"
               >
                 <PeopleMark />
-                <div className="group w-[165px] overflow-hidden rounded-[1.5rem] shadow-lg shadow-slate-300/40 sm:w-[230px] sm:rounded-[1.75rem] lg:w-[250px]">
+                <div className="group w-[156px] shrink-0 overflow-hidden rounded-[1.5rem] shadow-lg shadow-slate-300/40 sm:w-[230px] sm:rounded-[1.75rem] lg:w-[250px]">
                   <img
                     src={aboutData.handshakeImage}
                     alt={aboutData.handshakeImageAlt}
-                    className="h-[165px] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105 sm:h-[220px] lg:h-[215px]"
+                    className="h-[156px] w-full object-cover object-top transition-transform duration-700 ease-out group-hover:scale-105 sm:h-[220px] lg:h-[215px]"
                   />
                 </div>
               </motion.div>

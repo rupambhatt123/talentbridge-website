@@ -1,5 +1,5 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { AnimatePresence, motion, MotionConfig } from "framer-motion";
 import { ArrowRight, Menu, X } from "lucide-react";
@@ -16,6 +16,7 @@ export default function Navbar() {
   const headerData =
     websiteData.categories.TalentBridge.sections.Header.variants.TBHeader1;
 
+  const headerRef = useRef<HTMLElement>(null);
   const [active, setActive] = useState(headerData.defaultActiveId);
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
@@ -27,19 +28,28 @@ export default function Navbar() {
       setOpen(false);
     }
 
+    window.history.pushState(null, "", `#${cleanId}`);
+
     const scrollNow = () => {
       const target = document.getElementById(cleanId);
-      if (target) {
-        target.scrollIntoView({ behavior: "smooth", block: "start" });
-      } else {
-        window.location.hash = cleanId;
-      }
+      if (!target) return;
+
+      const headerHeight = headerRef.current?.offsetHeight ?? 80;
+      const top =
+        target.getBoundingClientRect().top + window.scrollY - headerHeight;
+
+      window.scrollTo({
+        top: Math.max(0, top),
+        behavior: "smooth",
+      });
     };
 
     if (closeDrawer) {
-      setTimeout(scrollNow, 120);
+      setTimeout(() => {
+        requestAnimationFrame(scrollNow);
+      }, 280);
     } else {
-      scrollNow();
+      requestAnimationFrame(scrollNow);
     }
   };
 
@@ -56,6 +66,10 @@ export default function Navbar() {
       .filter((el): el is HTMLElement => !!el);
     if (!els.length) return;
 
+    els.forEach((el) => {
+      el.classList.add("scroll-mt-20", "sm:scroll-mt-24");
+    });
+
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
@@ -71,13 +85,14 @@ export default function Navbar() {
   return (
     <MotionConfig reducedMotion="user">
       <motion.header
+        ref={headerRef}
         initial={{ y: -24, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        className={`${montserrat.className} sticky top-0 z-50 border-b backdrop-blur-md transition-all duration-300 ${
+        className={`${montserrat.className} sticky top-0 z-50 border-b transition-all duration-300 ${
           scrolled
-            ? "border-slate-200/70 bg-white/95 shadow-md shadow-slate-300/30"
-            : "border-transparent bg-white/80"
+            ? "border-slate-200/70 bg-white shadow-md shadow-slate-300/30"
+            : "border-transparent bg-white"
         }`}
       >
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between gap-3 px-4 sm:h-24 sm:px-6">
@@ -99,7 +114,7 @@ export default function Navbar() {
             />
           </a>
 
-          <nav className="hidden items-center gap-9 lg:flex xl:gap-12">
+          <nav className="hidden items-center gap-5 lg:flex xl:gap-9 2xl:gap-11">
             {headerData.navLinks.map((link) => {
               const isActive = active === link.id;
               return (
@@ -110,14 +125,14 @@ export default function Navbar() {
                     e.preventDefault();
                     navigateToSection(link.id, false);
                   }}
-                  className={`group relative py-2 text-[17px] font-semibold transition-colors duration-300 ${
+                  className={`relative whitespace-nowrap py-2 text-[15px] font-semibold transition-colors duration-300 xl:text-[17px] ${
                     isActive
                       ? "text-[#c8102e]"
                       : "text-[#0B2545] hover:text-[#c8102e]"
                   }`}
                 >
                   {link.name}
-                  {isActive ? (
+                  {isActive && (
                     <motion.span
                       layoutId="nav-underline"
                       transition={{
@@ -125,10 +140,8 @@ export default function Navbar() {
                         stiffness: 380,
                         damping: 32,
                       }}
-                      className="absolute -bottom-1 -left-2 -right-2 h-[3px] rounded-full bg-[#c8102e]"
+                      className="absolute -bottom-1 left-0 right-0 h-[3px] rounded-full bg-[#c8102e]"
                     />
-                  ) : (
-                    <span className="absolute -bottom-1 left-0 right-0 h-[3px] origin-left scale-x-0 rounded-full bg-[#c8102e]/50 transition-transform duration-300 group-hover:scale-x-100" />
                   )}
                 </a>
               );
@@ -141,13 +154,13 @@ export default function Navbar() {
               e.preventDefault();
               navigateToSection(headerData.ctaButton.href, false);
             }}
-            className="group hidden items-center gap-2.5 rounded-xl bg-gradient-to-b from-[#a50d28] to-[#8a0a22] px-7 py-3 text-[17px] font-bold text-white shadow-lg shadow-[#8a0a22]/25 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 lg:inline-flex"
+            className="group hidden shrink-0 items-center gap-2 whitespace-nowrap rounded-xl bg-gradient-to-b from-[#a50d28] to-[#8a0a22] px-5 py-2.5 text-[15px] font-bold text-white shadow-lg shadow-[#8a0a22]/25 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl active:translate-y-0 xl:gap-2.5 xl:px-7 xl:py-3 xl:text-[17px] lg:inline-flex"
           >
             {headerData.ctaButton.text}
             <ArrowRight
-              size={20}
+              size={18}
               strokeWidth={2.5}
-              className="transition-transform duration-300 group-hover:translate-x-1"
+              className="shrink-0 transition-transform duration-300 group-hover:translate-x-1 xl:h-5 xl:w-5"
             />
           </a>
 
@@ -169,7 +182,7 @@ export default function Navbar() {
               animate={{ height: "auto", opacity: 1 }}
               exit={{ height: 0, opacity: 0 }}
               transition={{ duration: 0.25, ease: "easeInOut" }}
-              className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-slate-100 bg-white/98 shadow-lg lg:hidden"
+              className="max-h-[calc(100vh-5rem)] overflow-y-auto border-t border-slate-100 bg-white shadow-lg lg:hidden"
             >
               <div className="mx-auto flex max-w-7xl flex-col gap-1.5 px-4 py-4 sm:px-6">
                 {headerData.navLinks.map((link) => (

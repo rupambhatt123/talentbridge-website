@@ -4,19 +4,35 @@
     "tagline": "HR & Recruitment Solutions",
     "phone": "+1 000 000 000",
     "footerPhone": "+1 000 000 000",
-    "email": "hello@xyz.com",
+    "email": "contact@xyz.com",
     "contactEmail": "contact@xyz.com",
     "address": "73 Bridge St Brooklyn, USA.",
     "footerAddress": {
-      "line1": "258 Business District",
-      "line2": "San Francisco, CA 94105"
+      "line1": "73 Bridge St Brooklyn",
+      "line2": "USA"
     },
-    "socialLinks": {
-      "facebook": "#",
-      "x": "#",
-      "linkedin": "#",
-      "instagram": "#"
-    }
+    "socialLinks": [
+      {
+        "name": "LinkedIn",
+        "icon": "linkedin",
+        "href": "https://www.linkedin.com/company/talentbridge"
+      },
+      {
+        "name": "Instagram",
+        "icon": "instagram",
+        "href": "https://www.instagram.com/talentbridge"
+      },
+      {
+        "name": "Twitter",
+        "icon": "twitter",
+        "href": "https://twitter.com/talentbridge"
+      },
+      {
+        "name": "Facebook",
+        "icon": "facebook",
+        "href": "https://www.facebook.com/talentbridge"
+      }
+    ]
   },
   "categories": {
     "TalentBridge": {
@@ -76,7 +92,9 @@
               "titleLine2": "Partner for",
               "titleHighlight": "Talent Acquisition",
               "description": "End-to-end recruitment and HR solutions to help businesses build high-performing teams and professionals find the right career opportunities.",
-              "image": "/hero.webp",
+              "bgImage": "/hero-background.webp",
+              "bgImageAlt": "Office team meeting background",
+              "image": "/hero-cutout.webp",
               "imageAlt": "Professional woman smiling",
               "stats": [
                 {
@@ -241,6 +259,14 @@
                   "image": "/staff3.webp",
                   "review": "From executive search to HR advisory, they act as a true strategic partner rather than just a vendor. Our retention rate improved noticeably after hiring through them.",
                   "rating": 5
+                },
+                {
+                  "id": "4",
+                  "name": "Siddharth Verma",
+                  "role": "VP of Engineering, NexaScale",
+                  "rating": 5,
+                  "review": "TalentBridge helped us hire senior frontend and backend engineers within two weeks without compromising on culture fit.",
+                  "image": "/hero-cutout.webp"
                 }
               ]
             }
@@ -364,7 +390,7 @@
               "ctaHighlight": "With Us",
               "ctaLine1": "Have a question, need support, or want to know more about our services?",
               "ctaLine2": "We’d love to hear from you.",
-              "email": "hello@xyz.com",
+              "email": "contact@xyz.com",
               "socials": [
                 { "name": "Facebook", "url": "#" },
                 { "name": "X", "url": "#" },
@@ -383,10 +409,10 @@
               "contactTitle": "Contact Info",
               "contactItems": [
                 { "icon": "phone", "lines": ["+1 000 000 000"], "fill": true },
-                { "icon": "mail", "lines": ["hello@xyz.com"], "fill": false },
+                { "icon": "mail", "lines": ["contact@xyz.com"], "fill": false },
                 {
                   "icon": "map",
-                  "lines": ["258 Business District", "San Francisco, CA 94105"],
+                  "lines": ["73 Bridge St Brooklyn, USA."],
                   "fill": true
                 }
               ],

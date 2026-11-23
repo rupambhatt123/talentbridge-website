@@ -10,6 +10,7 @@ import {
   CornerUpRight,
   CheckCircle2,
   ArrowLeft,
+  Globe,
 } from "lucide-react";
 import { Montserrat } from "next/font/google";
 import websiteData from "../data/websiteData.json";
@@ -20,11 +21,101 @@ const montserrat = Montserrat({
   display: "swap",
 });
 
+type ContactSocialLink = {
+  name: string;
+  icon: string;
+  href: string;
+};
+
+type ContactInfoItem = {
+  icon: string;
+  label: string;
+  value: string;
+};
+
+type ContactField = {
+  id: string;
+  label: string;
+  type: string;
+  placeholder: string;
+  required?: boolean;
+};
+
+type TBContact1Data = {
+  badge: string;
+  titleLine1: string;
+  titleHighlight: string;
+  description: string;
+  contactInfo: ContactInfoItem[];
+  socialLinks?: ContactSocialLink[];
+  fields: ContactField[];
+  messageField: {
+    id: string;
+    label: string;
+    rows: number;
+    placeholder: string;
+    required?: boolean;
+  };
+  submitButtonText: string;
+  thankYou: {
+    title: string;
+    titleHighlight: string;
+    description: string;
+    backButtonText: string;
+  };
+};
+
+type WebsiteDataShape = {
+  categories: {
+    TalentBridge: {
+      sections: {
+        Contact: {
+          variants: {
+            TBContact1: TBContact1Data;
+          };
+        };
+      };
+    };
+  };
+};
+
 const contactIcons = {
   location: MapPin,
   phone: PhoneCall,
   email: Mail,
 } as const;
+
+function SocialGlyph({ icon }: { icon: string }) {
+  switch (icon.toLowerCase()) {
+    case "linkedin":
+      return (
+        <svg viewBox="0 0 24 24" className="h-[18px] w-[18px] fill-current" aria-hidden>
+          <path d="M6.94 8.5H3.56V19.5H6.94V8.5ZM5.25 3.5C4.14 3.5 3.25 4.39 3.25 5.5C3.25 6.6 4.14 7.5 5.25 7.5C6.35 7.5 7.25 6.6 7.25 5.5C7.25 4.39 6.35 3.5 5.25 3.5ZM20.44 13.02C20.44 9.88 18.76 8.22 16.16 8.22C14.37 8.22 13.48 9.2 13.02 9.93V8.5H9.65C9.7 9.48 9.65 19.5 9.65 19.5H13.02V13.36C13.02 13.02 13.05 12.69 13.15 12.45C13.42 11.78 14.03 11.09 15.07 11.09C16.41 11.09 17.06 12.11 17.06 13.6V19.5H20.44V13.02Z" />
+        </svg>
+      );
+    case "instagram":
+      return (
+        <svg viewBox="0 0 24 24" className="h-[18px] w-[18px] fill-current" aria-hidden>
+          <path d="M12 7.3A4.7 4.7 0 1 0 16.7 12 4.7 4.7 0 0 0 12 7.3Zm0 7.75A3.05 3.05 0 1 1 15.05 12 3.05 3.05 0 0 1 12 15.05Zm6-7.94a1.1 1.1 0 1 1-1.1-1.1 1.1 1.1 0 0 1 1.1 1.1ZM21.2 8.07A6.17 6.17 0 0 0 19.63 4.1 6.17 6.17 0 0 0 15.66 2.53C14.38 2.02 11.15 2.15 12 2.15h0c-.85 0-4.08-.13-5.36.38A6.17 6.17 0 0 0 2.67 4.1 6.17 6.17 0 0 0 1.1 8.07C.59 9.35.72 12.58.72 12s-.13 2.65.38 3.93a6.17 6.17 0 0 0 1.57 3.97 6.17 6.17 0 0 0 3.97 1.57c1.28.51 4.51.38 5.36.38h0c.85 0 4.08.13 5.36-.38a6.17 6.17 0 0 0 3.97-1.57 6.17 6.17 0 0 0 1.57-3.97c.51-1.28.38-4.51.38-3.93s.13-2.65-.38-3.93ZM19.2 17.32a4.42 4.42 0 0 1-2.49 2.49c-.86.34-2.9.26-4.71.26s-3.85.08-4.71-.26a4.42 4.42 0 0 1-2.49-2.49c-.34-.86-.26-2.9-.26-4.71s-.08-3.85.26-4.71a4.42 4.42 0 0 1 2.49-2.49c.86-.34 2.9-.26 4.71-.26s3.85-.08 4.71.26a4.42 4.42 0 0 1 2.49 2.49c.34.86.26 2.9.26 4.71s.08 3.85-.26 4.71Z" />
+        </svg>
+      );
+    case "twitter":
+    case "x":
+      return (
+        <svg viewBox="0 0 24 24" className="h-[17px] w-[17px] fill-current" aria-hidden>
+          <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+        </svg>
+      );
+    case "facebook":
+      return (
+        <svg viewBox="0 0 24 24" className="h-[18px] w-[18px] fill-current" aria-hidden>
+          <path d="M13.5 9H16V6h-2.5C11.57 6 10 7.57 10 9.5V11H8v3h2v7h3v-7h2.25l.75-3H13V9.5c0-.28.22-.5.5-.5Z" />
+        </svg>
+      );
+    default:
+      return <Globe size={18} strokeWidth={2.2} />;
+  }
+}
 
 const inputClass =
   "w-full rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm text-slate-700 shadow-sm placeholder:text-slate-500 transition focus:border-[#a0001a] focus:outline-none focus:ring-4 focus:ring-[#a0001a]/10 sm:px-5 sm:py-3 sm:text-base";
@@ -37,8 +128,10 @@ const reveal = (delay = 0) => ({
 });
 
 export default function Contact() {
+  const typedData = websiteData as unknown as WebsiteDataShape;
   const contactData =
-    websiteData.categories.TalentBridge.sections.Contact.variants.TBContact1;
+    typedData.categories.TalentBridge.sections.Contact.variants.TBContact1;
+  const socialLinks = contactData.socialLinks ?? [];
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -154,7 +247,7 @@ export default function Contact() {
 
             <motion.p
               {...reveal(0.16)}
-              className="mt-3 max-w-lg text-sm font-medium leading-relaxed text-slate-700 sm:text-base lg:text-[17px]"
+              className="mt-3 line-clamp-2 max-w-lg text-sm font-medium leading-relaxed text-slate-700 sm:text-base lg:text-[17px]"
             >
               {contactData.description}
             </motion.p>
@@ -162,7 +255,7 @@ export default function Contact() {
             <div className="mt-6 space-y-3.5 sm:space-y-4">
               {contactData.contactInfo.map((item, i) => {
                 const Icon =
-                  contactIcons[item.icon as keyof typeof contactIcons];
+                  contactIcons[item.icon as keyof typeof contactIcons] ?? MapPin;
                 return (
                   <motion.div
                     key={item.label}
@@ -196,6 +289,26 @@ export default function Contact() {
                 );
               })}
             </div>
+
+            {socialLinks.length > 0 && (
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                {socialLinks.map((social) => {
+                  const isExternal = /^https?:\/\//i.test(social.href);
+                  return (
+                    <a
+                      key={social.name}
+                      href={social.href}
+                      aria-label={social.name}
+                      target={isExternal ? "_blank" : undefined}
+                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-[#0B2545] shadow-sm transition hover:-translate-y-0.5 hover:border-[#a0001a] hover:bg-[#fde4e7] hover:text-[#a0001a]"
+                    >
+                      <SocialGlyph icon={social.icon} />
+                    </a>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           <motion.div
