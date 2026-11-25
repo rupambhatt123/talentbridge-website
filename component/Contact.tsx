@@ -66,6 +66,9 @@ type TBContact1Data = {
 };
 
 type WebsiteDataShape = {
+  common?: {
+    socialLinks?: ContactSocialLink[];
+  };
   categories: {
     TalentBridge: {
       sections: {
@@ -84,6 +87,32 @@ const contactIcons = {
   phone: PhoneCall,
   email: Mail,
 } as const;
+
+const appHomeUrls: Record<string, string> = {
+  linkedin: "https://www.linkedin.com/",
+  instagram: "https://www.instagram.com/",
+  twitter: "https://x.com/",
+  x: "https://x.com/",
+  facebook: "https://www.facebook.com/",
+};
+
+function getAppHomeUrl(nameOrIcon: string): string {
+  const key = nameOrIcon.trim().toLowerCase();
+  return appHomeUrls[key] ?? "https://www.linkedin.com/";
+}
+
+function getContactHref(icon: string, value: string): string | null {
+  const normalizedIcon = icon.toLowerCase();
+  if (normalizedIcon === "phone") {
+    const cleanedPhone = value.replace(/[^\d+]/g, "");
+    return cleanedPhone ? `tel:${cleanedPhone}` : null;
+  }
+  if (normalizedIcon === "email") {
+    const cleanedEmail = value.trim();
+    return cleanedEmail ? `mailto:${cleanedEmail}` : null;
+  }
+  return null;
+}
 
 function SocialGlyph({ icon }: { icon: string }) {
   switch (icon.toLowerCase()) {
@@ -131,7 +160,10 @@ export default function Contact() {
   const typedData = websiteData as unknown as WebsiteDataShape;
   const contactData =
     typedData.categories.TalentBridge.sections.Contact.variants.TBContact1;
-  const socialLinks = contactData.socialLinks ?? [];
+  const socialLinks =
+    contactData.socialLinks && contactData.socialLinks.length > 0
+      ? contactData.socialLinks
+      : typedData.common?.socialLinks ?? [];
 
   const [submitted, setSubmitted] = useState(false);
 
@@ -256,6 +288,8 @@ export default function Contact() {
               {contactData.contactInfo.map((item, i) => {
                 const Icon =
                   contactIcons[item.icon as keyof typeof contactIcons] ?? MapPin;
+                const actionHref = getContactHref(item.icon, item.value);
+
                 return (
                   <motion.div
                     key={item.label}
@@ -281,9 +315,18 @@ export default function Contact() {
                       <p className="text-xs font-medium text-slate-600 sm:text-base">
                         {item.label}
                       </p>
-                      <p className="break-words text-base font-extrabold text-[#0B2545] sm:text-lg lg:text-[1.3rem]">
-                        {item.value}
-                      </p>
+                      {actionHref ? (
+                        <a
+                          href={actionHref}
+                          className="break-words text-base font-extrabold text-[#0B2545] transition-colors hover:text-[#a0001a] sm:text-lg lg:text-[1.3rem]"
+                        >
+                          {item.value}
+                        </a>
+                      ) : (
+                        <p className="break-words text-base font-extrabold text-[#0B2545] sm:text-lg lg:text-[1.3rem]">
+                          {item.value}
+                        </p>
+                      )}
                     </div>
                   </motion.div>
                 );
@@ -293,17 +336,17 @@ export default function Contact() {
             {socialLinks.length > 0 && (
               <div className="mt-6 flex flex-wrap items-center gap-3">
                 {socialLinks.map((social) => {
-                  const isExternal = /^https?:\/\//i.test(social.href);
+                  const appUrl = getAppHomeUrl(social.icon || social.name);
                   return (
                     <a
                       key={social.name}
-                      href={social.href}
+                      href={appUrl}
                       aria-label={social.name}
-                      target={isExternal ? "_blank" : undefined}
-                      rel={isExternal ? "noopener noreferrer" : undefined}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-[#0B2545] shadow-sm transition hover:-translate-y-0.5 hover:border-[#a0001a] hover:bg-[#fde4e7] hover:text-[#a0001a]"
                     >
-                      <SocialGlyph icon={social.icon} />
+                      <SocialGlyph icon={social.icon || social.name} />
                     </a>
                   );
                 })}

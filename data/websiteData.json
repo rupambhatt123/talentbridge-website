@@ -392,11 +392,11 @@
               "ctaLine2": "We’d love to hear from you.",
               "email": "contact@xyz.com",
               "socials": [
-                { "name": "Facebook", "url": "#" },
-                { "name": "X", "url": "#" },
-                { "name": "LinkedIn", "url": "#" },
-                { "name": "Instagram", "url": "#" }
-              ],
+  { "name": "Facebook", "url": "https://www.facebook.com/" },
+  { "name": "X", "url": "https://x.com/" },
+  { "name": "LinkedIn", "url": "https://www.linkedin.com/" },
+  { "name": "Instagram", "url": "https://www.instagram.com/" }
+],
               "about": "Your trusted partner in finding and nurturing top talent—creating lasting success for businesses and careers.",
               "quickLinksTitle": "Quick Links",
               "quickLinks": [
